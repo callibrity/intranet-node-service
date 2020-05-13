@@ -1,9 +1,24 @@
 var express = require('express');
 var router = express.Router();
 
+const announcements = [];
+
+const randomTime = 1589397591722;
+
+for (let i = 0; i < 10; i += 1) {
+  const newTime = randomTime - i * 10000000000;
+  announcements.push(
+    {
+      time: newTime,
+      text: newTime.toString().repeat(50)
+    }
+  )
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  const reducedAnnouncements = announcements.filter(({time}) => time >= randomTime - 3 * 10000000000)
+  res.send(reducedAnnouncements);
 });
 
 module.exports = router;
