@@ -15,10 +15,18 @@ for (let i = 0; i < 10; i += 1) {
   )
 }
 
+const calendar = [];
+
+
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/announcements', function(req, res, next) {
   const reducedAnnouncements = announcements.filter(({time}) => time >= randomTime - 3 * 10000000000)
   res.send(reducedAnnouncements);
+});
+
+router.get('/calendar', function(req, res, next) {
+  res.send(calendar);
 });
 
 module.exports = router;
