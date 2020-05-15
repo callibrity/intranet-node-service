@@ -12,7 +12,7 @@ const announcements = [
   },
   {
     date: 'May 5',
-    event: "Alex, Alex, and Alec did not care.  That was everyone else's problem."
+    event: "Alex, Alex, and Alec thought everyone should change their names to Ale*"
   }
 ];
 
