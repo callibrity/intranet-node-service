@@ -16,7 +16,6 @@ const announcements = [
   }
 ];
 
-/* Testing out announcements with random strings */
 router.get('/', function(req, res, next) {
   res.send(announcements);
 });
