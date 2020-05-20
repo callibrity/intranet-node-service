@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var client = require('../database');
 
 const announcements = [
   {
@@ -17,6 +18,11 @@ const announcements = [
 ];
 
 router.get('/', function(req, res, next) {
-  res.send(announcements);
+  client.query('SELECT * FROM Announcements', function(err, result) {
+    if(err) {
+      return console.error('error running query', err);
+    }
+    res.send(result.rows);
+  });
 });
 module.exports = router;

@@ -1,17 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var client = require('../database');
 
 router.get('/', function(req, res){
-  const {startMonth, startYear, endMonth, endYear} = getStartAndEndFromRequest(req);
-  
-  const list = events.filter(ele => {
-    const [year, month] = ele.start.split('-');
-    const yearCheck = year >= startYear && year <= endYear;
-    const monthCheck = month >= startMonth && month <= endMonth;
-    return yearCheck && monthCheck;
-  })
 
-  res.send(list);
+  client.query('SELECT * FROM Calendar', function(err, result) {
+    if(err) {
+      return console.error('error running query', err);
+    }
+
+    const {startMonth, startYear, endMonth, endYear} = getStartAndEndFromRequest(req);
+  
+    const list = result.rows.filter(ele => {
+      const [year, month] = ele.start.split('-');
+      const yearCheck = year >= startYear && year <= endYear;
+      const monthCheck = month >= startMonth && month <= endMonth;
+      return yearCheck && monthCheck;
+    })
+  
+    res.send(list);
+  });
 })
 
 const events = [

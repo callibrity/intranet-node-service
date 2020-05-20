@@ -16,7 +16,6 @@ describe('Get /announcements', () => {
     .get('/announcements')
     .expect(200)
     .expect('Content-Type', /json/)
-    .expect('Content-Length', '249')
     .end((err, res) => {
       if (err) throw err;
     });
@@ -30,7 +29,6 @@ describe('Get /calendar', () => {
     .get(`/calendar${calendarRequestString}`)
     .expect(200)
     .expect('Content-Type', /json/)
-    .expect('Content-Length', '459')
     .end((err, res) => {
       if (err) throw err;
     });
