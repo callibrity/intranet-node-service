@@ -1,4 +1,4 @@
-var pg = require('pg');
+var { Pool, Client } = require('pg');
 var app = require('./app');
 
 var testString = 'postgres://jdkfzrdp:Rj2bM4jUptX89UEQEUiC0pyb6SMPZN6L@raja.db.elephantsql.com:5432/jdkfzrdp';
@@ -7,12 +7,15 @@ var prodString = 'postgres://jrzjwmlt:Y4Z6XpJfFVh4wqih79IW_CofZR1VzrbE@salt.db.e
 var env = process.env.NODE_ENV;
 
 var conString = env === 'test' ? testString : env === 'production' ? prodString : devString;
-var client = new pg.Client(conString);
+var pool = new Pool({connectionString: conString});
 
-client.connect(function(err) {
-  if(err) {
-    return console.error('could not connect to postgres', err);
+module.exports = {
+  query: (text, callback) => {
+    const start = Date.now();
+    return pool.query(text, (err, res) => {
+      const duration = Date.now() - start;
+      console.log('executed query', {text, duration, rows: res.rowCount});
+      callback(err, res)
+    })
   }
-});
-
-module.exports = client;
+};
