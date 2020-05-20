@@ -1,42 +1,96 @@
 const request = require('supertest');
 const app = require('../app');
-const client = require('../database');
 
-jest.mock('../database');
-
-const calendarRequestString = '?start=Sun%20Apr%2026%202020%2000:00:00%20GMT-0400%20(Eastern%20Daylight%20Time)&end=Sun%20Jun%2007%202020%2000:00:00%20GMT-0400%20(Eastern%20Daylight%20Time';
-
-describe('Sample Test', () => {
-    it('should test that true === true', () => {
-      expect(true).toBe(true)
+describe('Get /announcements', () => {
+    it('should get the announcements array', async () => {
+      const res = await request(app).get('/announcements');
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toBeInstanceOf(Array);
     })
   }
 )
 
-describe('Get /announcements', () => {
-  it('should get the announcements array', () => {
-    const res = request(app)
-    .get('/announcements')
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .end((err, res) => {
-      if (err) throw err;
-    });
-  })
-}
+describe('Post /announcements', () => {
+    it('should respond with "Date is missing!"', async () => {
+      const res = await request(app).post('/announcements');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Date is missing!'})
+    })
+
+    it('should respond with "Event is missing!"', async () => {
+      const res = await request(app).post('/announcements?date=test');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Event is missing!'})
+    })
+
+    it('should respond with "Date is missing!"', async () => {
+      const res = await request(app).post('/announcements?event=test');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Date is missing!'})
+    })
+
+    it('should post the event', async () => {
+      const res = await request(app).post('/announcements?event=test&date=test');
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toEqual({"message": 'Event test: test created!'})
+    })
+  }
 )
 
-describe('Get /calendar', () => {
-  it('should get list of calendar events', () => {
-    const res = request(app)
-    .get(`/calendar${calendarRequestString}`)
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .end((err, res) => {
-      if (err) throw err;
-    });
-  })
-}
+
+describe('Delete /announcements', () => {
+    it('should respond with "Date is missing!"', async () => {
+      const res = await request(app).delete('/announcements');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Date is missing!'})
+    })
+
+    it('should respond with "Event is missing!"', async () => {
+      const res = await request(app).delete('/announcements?date=test');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Event is missing!'})
+    })
+
+    it('should respond with "Date is missing!"', async () => {
+      const res = await request(app).delete('/announcements?event=test');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Date is missing!'})
+    })
+
+    it('should delete the event', async () => {
+      const res = await request(app).delete('/announcements?event=test&date=test');
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toEqual({"message": 'Event test: test deleted!'})
+    })
+  }
 )
+
+describe('Put /announcements', () => {
+    it('should respond with "Date is missing!"', async () => {
+      const res = await request(app).put('/announcements');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Date is missing!'})
+    })
+
+    it('should respond with "Event is missing!"', async () => {
+      const res = await request(app).put('/announcements?date=test');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Event is missing!'})
+    })
+
+    it('should respond with "Date is missing!"', async () => {
+      const res = await request(app).put('/announcements?event=test');
+      expect(res.statusCode).toEqual(400);
+      expect(res.body).toEqual({"message": 'Date is missing!'})
+    })
+
+    it('should update the event', async () => {
+      const res = await request(app).put('/announcements?event=test&date=test&update=update');
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toEqual({"message": 'Event updated to test: update!'})
+    })
+  }
+)
+
 
   

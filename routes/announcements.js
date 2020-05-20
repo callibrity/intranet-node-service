@@ -56,7 +56,7 @@ router.put('/', function(req, res) {
   const sqlString = `UPDATE Announcements SET event='${event}' WHERE date='${date}' AND event='${event}'`
   client.query(sqlString, function(err, result) {
     if(queryHadAnError(err, res)) {return}
-    return res.status(200).send({message: `Event updated to ${date}: ${event}!`});
+    return res.status(200).send({message: `Event updated to ${date}: ${update}!`});
   });
 });
 
