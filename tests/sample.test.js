@@ -10,30 +10,4 @@ describe('Sample Test', () => {
   }
 )
 
-describe('Get /announcements', () => {
-  it('should get the announcements array', () => {
-    const res = request(app)
-    .get('/announcements')
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .end((err, res) => {
-      if (err) throw err;
-    });
-  })
-}
-)
-
-describe('Get /calendar', () => {
-  it('should get list of calendar events', () => {
-    const res = request(app)
-    .get(`/calendar${calendarRequestString}`)
-    .expect(200)
-    .expect('Content-Type', /json/)
-    .end((err, res) => {
-      if (err) throw err;
-    });
-  })
-}
-)
-
   
