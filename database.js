@@ -1,4 +1,4 @@
-var { Pool, Client } = require('pg');
+var { Pool } = require('pg');
 var app = require('./app');
 
 var testString = 'postgres://jdkfzrdp:Rj2bM4jUptX89UEQEUiC0pyb6SMPZN6L@raja.db.elephantsql.com:5432/jdkfzrdp';
@@ -8,6 +8,29 @@ var env = process.env.NODE_ENV;
 
 var conString = env === 'test' ? testString : env === 'production' ? prodString : devString;
 var pool = new Pool({connectionString: conString});
+
+function getQuery(){
+
+}
+
+function postQuery(){
+
+}
+
+function deleteQuery(){
+
+}
+
+function putQuery(){
+
+}
+
+const client = {
+  getQuery,
+  postQuery,
+  deleteQuery,
+  putQuery
+}
 
 module.exports = {
   query: (text, callback) => {
