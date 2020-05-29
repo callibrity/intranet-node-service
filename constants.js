@@ -1,4 +1,4 @@
-export const employees = 
+const employees = 
 [
   {
     "id": 0,
@@ -67,3 +67,5 @@ export const employees =
     "photo": "https://www.callibrity.com/hs-fs/hubfs/Callibrity_December2018%20Theme/Images/aubrey-f.jpg?width=900&height=900&name=aubrey-f.jpg"
   }
 ];
+
+exports.employees = employees;
