@@ -1,0 +1,43 @@
+name: Build and deploy to GCP
+on:
+  push:
+    branches:
+      - master
+
+jobs:  
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+
+    - name: Cache node modules
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+           ${{ runner.os }}-node-
+           
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Install, build, and test
+      run: |
+        npm ci
+        npm run build --if-present
+        npm test
+      env:
+        CI: true
+
+    - name: Deploy to GCP
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '276.0.0'
+        service_account_email: ${{secrets.GCP_SA_EMAIL}}
+        service_account_key: ${{secrets.GCP_SA_KEY}}
+    - run: gcloud config set project intranet-277714
+    - run: gcloud app deploy api.yaml
