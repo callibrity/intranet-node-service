@@ -1,13 +1,9 @@
-var { Pool } = require('pg');
+var { pool } = require('./databaseURL');
 var app = require('../app');
-var { connectionString } = require('./databaseURL');
-var { newsEventAndDateExist } = require('./newsEventAndDateExist')
 var { queryHadAnError } = require('./queryHadAnError');
 
-var pool = new Pool({connectionString});
-
-function getQuery(res){
-  const sqlString = 'SELECT * FROM Announcements';
+function getQuery(req, res){
+  const sqlString = `SELECT * FROM employee${conditionString(req.query)}`;
   pool.query(sqlString, function(err, result) {
     if(queryHadAnError(err, res)) {return}
     return res.status(200).send(result.rows);
