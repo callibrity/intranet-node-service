@@ -1,6 +1,6 @@
 var { Pool } = require('pg');
 var app = require('../app');
-var { connectionString } = require('./sqlURL');
+var { connectionString } = require('./databaseURL');
 
 var pool = new Pool({connectionString});
 
