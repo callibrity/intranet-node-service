@@ -1,3 +1,4 @@
+var { Pool } = require('pg');
 
 const testURL = 'postgres://jdkfzrdp:Rj2bM4jUptX89UEQEUiC0pyb6SMPZN6L@raja.db.elephantsql.com:5432/jdkfzrdp';
 
@@ -7,4 +8,6 @@ const prodURL = 'postgres://jrzjwmlt:Y4Z6XpJfFVh4wqih79IW_CofZR1VzrbE@salt.db.el
 
 var env = process.env.NODE_ENV;
 
-exports.connectionString = env === 'test' ? testURL : env === 'production' ? prodURL : devURL;
+const connectionString = env === 'test' ? testURL : env === 'production' ? prodURL : devURL;
+
+exports.pool = new Pool({connectionString});
