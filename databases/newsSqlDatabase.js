@@ -1,12 +1,8 @@
 var { Pool } = require('pg');
 var app = require('../app');
+var { connectionString } = require('./sqlURL');
 
-var {testString, devString, prodString} = require('../constants');
-
-var env = process.env.NODE_ENV;
-
-var conString = env === 'test' ? testString : env === 'production' ? prodString : devString;
-var pool = new Pool({connectionString: conString});
+var pool = new Pool({connectionString});
 
 function eventAndDateExist(date, event, res){
   if(!date){

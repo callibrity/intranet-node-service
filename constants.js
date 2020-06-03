@@ -67,9 +67,3 @@ exports.employees =
     "photo": "https://www.callibrity.com/hs-fs/hubfs/Callibrity_December2018%20Theme/Images/aubrey-f.jpg?width=900&height=900&name=aubrey-f.jpg"
   }
 ];
-
-exports.testString = 'postgres://jdkfzrdp:Rj2bM4jUptX89UEQEUiC0pyb6SMPZN6L@raja.db.elephantsql.com:5432/jdkfzrdp';
-
-exports.devString = 'postgres://xsuzfsll:sSa6qY83tfbIeykZ4Np1mROIohahR9w0@salt.db.elephantsql.com:5432/xsuzfsll';
-
-exports.prodString = 'postgres://jrzjwmlt:Y4Z6XpJfFVh4wqih79IW_CofZR1VzrbE@salt.db.elephantsql.com:5432/jrzjwmlt';
