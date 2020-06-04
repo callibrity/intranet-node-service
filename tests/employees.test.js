@@ -2,11 +2,11 @@ const request = require("supertest");
 const app = require("../app");
 
 describe("Get /employees", () => {
-  it("should get employees array with length 8", async () => {
+  it("should get employees array with length 6", async () => {
     const res = await request(app).get("/employees");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(8);
+    expect(res.body.length).toBe(6);
   });
  
   it("should get employees array with length 1", async () => {
@@ -25,7 +25,7 @@ describe("Get /employees", () => {
 });
 
 describe("Put /employees", () => {
-  it("should get employees array with length 8", async () => {
+  it("should get employees array with length 6", async () => {
     const res = await request(app).put("/employees?name=alec").send({name: "Alec"});
     expect(res.statusCode).toEqual(200);
     expect(res.body).toEqual({"message": "alec updated!"});
