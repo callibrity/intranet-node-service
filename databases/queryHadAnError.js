@@ -4,4 +4,4 @@ exports.queryHadAnError = function(err, res){
     return true;
   }
   return false;
-}
+}; 

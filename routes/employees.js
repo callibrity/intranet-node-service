@@ -1,12 +1,12 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var {getQuery, putQuery} = require('../databases/employeesDatabase');
+var {getQuery, putQuery} = require("../databases/employeesDatabase");
 
-router.get('/', function(req, res) {
+router.get("/", function(req, res) {
   getQuery(req, res);
 });
 
-router.put('/', function(req, res) {
+router.put("/", function(req, res) { 
   putQuery(req, res);
 });
 
