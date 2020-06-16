@@ -2,32 +2,32 @@ const request = require("supertest");
 const app = require("../app");
 
 describe("Get /employees", () => {
-  it("should get employees array with length 6", async () => {
+  it("should get array", async () => {
     const res = await request(app).get("/employees");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(8);
+    expect(res.body[0].Name).not.toBe(undefined);
   });
  
-  it("should get employees array with length 1", async () => {
-    const res = await request(app).get("/employees?name=alec");
+  it("should get element with Name 'test'", async () => {
+    const res = await request(app).get("/employees?name=test");
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(1);
+    expect(res.body[0].Name).toBe("test");
   });
 
-  it("should get employees array with length 0", async () => {
-    const res = await request(app).get("/employees?name=alec&office=columbus");
+  it("should get element with Name 'test' and Office 'Cincinnati'", async () => {
+    const res = await request(app).get("/employees?name=test&office=cincinnati");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(0);
+    expect(res.body[0].Name).toBe("test");
+    expect(res.body[0].Office).toBe("Cincinnati");
   });
 });
 
 describe("Put /employees", () => {
-  it("should get employees array with length 6", async () => {
-    const res = await request(app).put("/employees?name=alec").send({name: "Alec"});
+  it("should respond that employee 'test' was updated", async () => {
+    const res = await request(app).put("/employees?name=test").send({Name: "test"});
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toEqual({"message": "alec updated!"});
+    expect(res.body).toEqual({"message": "test updated!"});
   });
 });

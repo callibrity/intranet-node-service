@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var {getQuery, postQuery, deleteQuery, putQuery} = require("../databases/newsDatabase");
+var {getQuery, postQuery, deleteQuery, putQuery} = require("../databases/newsQuery");
 
 router.get("/", function(req, res) {
   getQuery(res);

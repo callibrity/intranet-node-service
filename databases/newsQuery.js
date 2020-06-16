@@ -1,4 +1,4 @@
-var { client } = require("./databaseURL"); 
+var { client } = require("./databaseClient"); 
 var { newsEventAndDateExist, queryHadAnError } = require("./helperFunctions");
 
 function getQuery(res){

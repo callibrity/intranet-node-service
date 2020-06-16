@@ -2,37 +2,34 @@ const capitalFirstLetterOnly = (str) => str.charAt(0).toUpperCase() + str.slice(
 
 exports.sqlConditionString = function(query){
   let queryKeys = Object.keys(query);
-  let conditions = "";
-  let started = false;
-  for(let i = 0; i < queryKeys.length; i += 1){
-    const searchValue = query[queryKeys[i]];
-    const tableColumn = capitalFirstLetterOnly(queryKeys[i]);
-    const currentString = `UPPER("${tableColumn}") LIKE UPPER('%${searchValue}%')`;
-    if(!started){
-      conditions = ` WHERE ${currentString}`;
-      started = true;
+  let sqlConditions = "";
+  queryKeys.forEach((queryKey) => {
+    const searchValue = query[queryKey];
+    const tableColumn = capitalFirstLetterOnly(queryKey);
+    const conditionString = `UPPER("${tableColumn}") LIKE UPPER('%${searchValue}%')`;
+    if(sqlConditions === ""){
+      sqlConditions = ` WHERE ${conditionString}`;
     } else{
-      conditions = `${conditions} AND ${currentString}`; 
+      sqlConditions = `${sqlConditions} AND ${conditionString}`; 
     }
-  }
-  return conditions;
+  });
+  return sqlConditions;
 };
 
 exports.sqlUpdateString = function(query){
   let queryKeys = Object.keys(query);
-  let updates = "";
-  let started = false;
-  for(let i = 0; i < queryKeys.length; i += 1){
-    const currentKey = capitalFirstLetterOnly(queryKeys[i]);
-    const currentString = `${currentKey}='${query[currentKey]}'`;
-    if(!started){
-      updates = currentString;
-      started = true;
+  let sqlUpdate = "";
+  queryKeys.forEach((queryKey) => {
+    const updateValue = query[queryKey];
+    const tableColumn = capitalFirstLetterOnly(queryKey);
+    const updateString = `"${tableColumn}"='${updateValue}'`;
+    if(sqlUpdate === ""){
+      sqlUpdate = updateString;
     } else{
-      updates = `${updates}, ${currentString}`; 
+      sqlUpdate = `${sqlUpdate}, ${updateString}`; 
     }
-  }
-  return updates;
+  });
+  return sqlUpdate;
 }; 
 
 exports.queryHadAnError = function(err, res){

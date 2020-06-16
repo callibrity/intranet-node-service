@@ -2,7 +2,8 @@ var { client } = require("./databaseClient");
 var { queryHadAnError, sqlConditionString, sqlUpdateString } = require("./helperFunctions");
 
 function getQuery(req, res){
-  const sqlString = `SELECT * FROM "Employees"${sqlConditionString(req.query)}`;
+  const { query } = req;
+  const sqlString = `SELECT * FROM "Employees"${sqlConditionString(query)}`;
   client.query(sqlString, function(err, result) {
     if(queryHadAnError(err, res)) {return;}
     return res.status(200).send(result.rows);
