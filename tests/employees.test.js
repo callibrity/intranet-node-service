@@ -6,7 +6,7 @@ describe("Get /employees", () => {
     const res = await request(app).get("/employees");
     expect(res.statusCode).toEqual(200);
     expect(res.body).toBeInstanceOf(Array);
-    expect(res.body.length).toBe(8);
+    expect(res.body.length).toBe(9);
   });
  
   it("should get employees array with length 1", async () => {
