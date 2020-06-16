@@ -1,13 +1,10 @@
-var express = require("express");
-var router = express.Router();
-var {getQuery, putQuery} = require("../databases/employeesQuery");
+var express = require('express')
+var router = express.Router()
+var {getEmployeesQuery, putEmployeesQuery} = require('../databases/queryStrings')
+var {executeQueryAndRespond} = require('../databases/executeQueryAndRespond')
 
-router.get("/", function(req, res) {
-  getQuery(req, res);
-});
+router.get('/', (req, res) => executeQueryAndRespond(req, res, getEmployeesQuery))
 
-router.put("/", function(req, res) { 
-  putQuery(req, res);
-});
+router.put('/', (req, res) => executeQueryAndRespond(req, res, putEmployeesQuery))
 
-module.exports = router;
+module.exports = router

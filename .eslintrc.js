@@ -18,8 +18,8 @@ module.exports = {
   plugins: ["jest"],
   rules: {
     indent: ["error", 2, { SwitchCase: 1 }],
-    quotes: ["error", "double"],
-    semi: ["error", "always"],
+    quotes: ["error", "single"],
+    semi: ["error", "never"],
     "no-console": ["warn"],
     "brace-style": ["error", "1tbs", { allowSingleLine: true }],
     "jest/expect-expect": "error",
