@@ -36,3 +36,4 @@ jobs:
         npm test
       env:
         CI: true
+        CONNECTION_STRING: ${{secrets.CONNECTION_STRING}}
