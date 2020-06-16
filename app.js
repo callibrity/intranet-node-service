@@ -5,6 +5,10 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require("cors");
 
+require("dotenv").config({
+  path: ".env.development"
+});
+
 var newsRouter = require("./routes/news");
 var employeesRouter = require("./routes/employees");
 
