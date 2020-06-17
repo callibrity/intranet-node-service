@@ -7,3 +7,7 @@ exports.getEmployeesQuery = ({query}) => objectIsEmpty(query) ?
 exports.putEmployeesQuery = ({body, query}) => (
   `UPDATE "Employees" SET ${sqlUpdateValues(body)} WHERE ${sqlWhereConditions(query)}`
 )
+
+exports.getWikiQuery = ({body, query}) => objectIsEmpty(query) ?
+  'Select * FROM "Employees"'
+  :'SELECT * FROM "Empl'
