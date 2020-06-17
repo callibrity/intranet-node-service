@@ -1,15 +1,24 @@
-var { sqlWhereConditions, sqlUpdateValues, objectIsEmpty } = require('./helperFunctions')
+var { sqlWhereConditions, sqlUpdateValues, sqlInsertValues, objectIsEmpty } = require('./helperFunctions')
 
-exports.getEmployeesQuery = ({query}) => objectIsEmpty(query) ?
-  'SELECT * FROM employees' 
-  :`SELECT * FROM employees WHERE ${sqlWhereConditions(query)}`
-
-exports.putEmployeesQuery = ({body, query}) => (
-  `UPDATE "Employees" SET ${sqlUpdateValues(body)} WHERE ${sqlWhereConditions(query)}`
+exports.getEmployeesQuery = ({query}) => (
+  objectIsEmpty(query) ?
+    'SELECT * FROM employees' 
+    :`SELECT * FROM employees WHERE ${sqlWhereConditions(query)}`
 )
 
-exports.getWikiQuery = ({body, query}) => objectIsEmpty(query) ?
-  'Select * FROM "Employees"'
-  :'SELECT * FROM "Empl'
+exports.putEmployeesQuery = ({body, query}) => (
   `UPDATE employees SET ${sqlUpdateValues(body)} WHERE ${sqlWhereConditions(query)}`
+)
+
+exports.postEmployeesQuery = ({body}) => (
+  `INSERT INTO employees ${sqlInsertValues(body)}`
+)
+
+exports.deleteEmployeesQuery = ({query}) => (
+  `DELETE FROM employees WHERE ${sqlWhereConditions(query)}`
+)
+
+exports.getWikiQuery = ({query}) => (
+  objectIsEmpty(query) ?
+  'SELECT * FROM wiki_content'
 )

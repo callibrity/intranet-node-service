@@ -1,5 +1,3 @@
-const capitalFirstLetterOnly = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
-
 const forEachQueryParam = (query, callback) => {
   const queryParams = Object.keys(query)
   queryParams.forEach((queryParam) => {
@@ -28,6 +26,16 @@ exports.sqlUpdateValues = function(query){
   })
   return sqlUpdate
 } 
+
+exports.sqlInsertValues = function(query){
+  let sqlColumns = ''
+  let sqlValues = ''
+  forEachQueryParam(query, (tableColumn, updateValue) => {
+    const sqlColumns = sqlColumns === '' ? tableColumn : `, ${tableColumn}`
+    const sqlValues = sqlValues === '' ? updateValue : `, ${updateValue}`
+  })
+  return `(${sqlColumns}) VALUES (${sqlValues})`
+}
 
 exports.objectIsEmpty = (obj) => Object.keys(obj).length === 0
 
