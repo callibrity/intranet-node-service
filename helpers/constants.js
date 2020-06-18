@@ -1,0 +1,1 @@
+exports.dbCallStatus = {success: "fufilled", error: "rejected"};

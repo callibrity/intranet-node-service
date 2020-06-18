@@ -25,7 +25,7 @@ describe('Get /employees', () => {
 })
 
 describe('Put /employees', () => {
-  it('should update 1 row', async () => {
+  it.skip('should update 1 row', async () => {
     const res = await request(app).put('/employees?name=test').send({name: 'test'})
     expect(res.statusCode).toEqual(200)
   })

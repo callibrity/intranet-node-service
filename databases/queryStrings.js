@@ -1,6 +1,6 @@
-var { sqlWhereConditions, sqlUpdateValues, objectIsEmpty } = require('./helperFunctions')
+const { sqlWhereConditions, sqlUpdateValues, objectIsEmpty } = require('./../helpers/helperFunctions')
 
-exports.getEmployeesQuery = ({query}) => objectIsEmpty(query) ?
+exports.getEmployeesQuery = (query) => objectIsEmpty(query) ?
   'SELECT * FROM employees' 
   :`SELECT * FROM employees WHERE ${sqlWhereConditions(query)}`
 

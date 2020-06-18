@@ -1,5 +1,3 @@
-const capitalFirstLetterOnly = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
-
 const forEachQueryParam = (query, callback) => {
   const queryParams = Object.keys(query)
   queryParams.forEach((queryParam) => {
