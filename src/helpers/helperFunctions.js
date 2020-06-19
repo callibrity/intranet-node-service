@@ -18,15 +18,6 @@ exports.sqlWhereConditions = function(query){
   return sqlConditions
 }
 
-exports.sqlUpdateValues = function(query){
-  let sqlUpdate = ''
-  forEachQueryParam(query, (tableColumn, updateValue) => {
-    const updateString = `"${tableColumn}"='${updateValue}'`
-    sqlUpdate = sqlUpdate === '' ? updateString : `${sqlUpdate}, ${updateString}`
-  })
-  return sqlUpdate
-} 
-
 exports.objectIsEmpty = (obj) => Object.keys(obj).length === 0;
 
 exports.respondWithError = (res, err) => res.status(500).send({message: `Request Failed: ${err}`});

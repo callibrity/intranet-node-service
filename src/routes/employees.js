@@ -3,7 +3,7 @@ const { respondWithError, respondWithResultAndSuccess, respondWithSuccess } = re
 const express = require("express");
 const router = express.Router();
 const { getEmployeesQuery, getUpdateEmployeeQuery } = require("../databases/queryStrings");
-const { executeSingleQuery} = require("../databases/executeQuery");
+const { executeSingleQuery, sendQueries} = require("../databases/executeQuery");
 
 router.get("/", async (req, res) => {
   const queryString = getEmployeesQuery(req.query);
