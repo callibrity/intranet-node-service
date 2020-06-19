@@ -27,8 +27,10 @@ exports.sqlUpdateValues = function(query){
   return sqlUpdate
 } 
 
-exports.objectIsEmpty = (obj) => Object.keys(obj).length === 0
+exports.objectIsEmpty = (obj) => Object.keys(obj).length === 0;
 
-exports.respondWithError = (res, err) => res.status(500).send({message: `Request Failed: ${err}`})
+exports.respondWithError = (res, err) => res.status(500).send({message: `Request Failed: ${err}`});
 
-exports.respondWithResult = (res, result) => res.status(200).send(result.rows)
+exports.respondWithResultAndSuccess = (res, result) => res.status(200).send(result.rows);
+
+exports.respondWithSuccess = (res) => res.status(200).send();
